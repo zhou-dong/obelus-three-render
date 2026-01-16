@@ -1,15 +1,32 @@
 {
   "name": "obelus-three-render",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.0.4",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "node -e \"if (require('fs').existsSync('dist')) require('fs').rmSync('dist', { recursive: true })\"",
+    "build": "npm run clean && tsc",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest run --coverage",
+    "release": "npm publish --access public"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "devDependencies": {
+    "@types/three": "^0.182.0",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "obelus": "^0.0.14",
+    "three": "^0.182.0"
   }
 }
